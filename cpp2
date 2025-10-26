@@ -1,0 +1,62 @@
+class Tirelire {
+private:
+    double montant; 
+
+public:
+    Tirelire() : montant(0) {}
+
+    double getMontant() const {
+        return montant;
+    }
+
+    void afficher() const {
+        if (montant <= 0)
+            std::cout << "Vous etes sans le sou." << std::endl;
+        else
+            std::cout << "Vous avez : " << montant << " euros dans votre tirelire." << std::endl;
+    }
+
+    void secouer() const {
+        if (montant > 0)
+            std::cout << "Bing bing" << std::endl;
+    }
+
+    void remplir(double m) {
+        if (m > 0)
+            montant += m;
+    }
+
+    void vider() {
+        montant = 0;
+    }
+
+    void puiser(double m) {
+        if (m <= 0) return;
+        if (m >= montant)
+            montant = 0;
+        else
+            montant -= m;
+    }
+
+    bool montant_suffisant(double budget, double &solde) const {
+        if (budget <= 0) {
+            solde = montant;
+            return true;
+        }
+
+        if (montant >= budget) {
+            solde = montant - budget;
+            return true;
+        } else {
+            solde = budget - montant;  
+            return false;
+        }
+    }
+
+    double calculerSolde(double budget) const {
+        if (budget <= 0) return montant;
+        return montant - budget;
+    }
+};
+
+
